@@ -2,17 +2,24 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user',
-  template: '<h1>Name : {{name}}</h1>' +
+  template: '<h1 xmlns="http://www.w3.org/1999/html">Name : {{name}}</h1>' +
   '<h3>E mail : {{email}}</h3>' +
   '<h4>Address : {{address.street}},{{address.city}},{{address.country}}</h4>' +
-  '<button (click)=toggleSports()>{{showSports ? "Hide Sports" : "Show Sportstoo"}}</button>' +
+  '<button (click)=toggleSports()>{{showSports ? "Hide Sports" : "Show Sports"}}</button>' +
   '<h1>{{showSport}}</h1>' +
   '<div *ngIf="showSports">' +
     '<h4>Sports</h4>' +
     '<ul>' +
       '<li *ngFor=" let i of sports">{{i}}</li>' +
     '</ul>' +
-  '</div>'
+  '</div>' +
+  '<h3>Edit User</h3>' +
+  '<form>' +
+    '<label>Name : </label>' +
+    '<input type="text" name="name" [(ngModel)] ="name"/><br/>' +
+    '<label>Email : </label>' +
+    '<input type="text" name="email" [(ngModel)] ="email"/><br/>' +
+  '</form>'
 })
 export class UserComponent {
   name: string;
