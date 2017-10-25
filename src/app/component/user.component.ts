@@ -6,12 +6,15 @@ import { Component } from '@angular/core';
   '<h3>E mail : {{email}}</h3>' +
   '<h4>Address : {{address.street}},{{address.city}},{{address.country}}</h4>' +
   '<button (click)=toggleSports()>{{showSports ? "Hide Sports" : "Show Sports"}}</button>' +
-  '<h1>{{showSport}}</h1>' +
   '<div *ngIf="showSports">' +
     '<h4>Sports</h4>' +
     '<ul>' +
-      '<li *ngFor=" let i of sports">{{i}}</li>' +
+      '<li *ngFor=" let sp of sports; let i = index">{{sp}} <button (click)="deleteSport(i)" > Delete</button></li>' +
     '</ul>' +
+    '<form (submit)="addSport(sport.value)">' +
+    '<label>Add Sport : </label>' +
+    '<input type="text" #sport/><br/>' +
+    '</form>' +
   '</div>' +
   '<h3>Edit User</h3>' +
   '<form>' +
@@ -27,6 +30,7 @@ export class UserComponent {
   address: Address;
   sports: string[];
   showSports: boolean;
+  newSport: string;
 
   constructor() {
     this.name = 'milinda';
@@ -38,6 +42,7 @@ export class UserComponent {
     };
     this.sports = ['Rugby', 'Baseball', 'Basketball'];
     this.showSports = false;
+    this.newSport = '';
   }
 
   toggleSports() {
@@ -46,6 +51,14 @@ export class UserComponent {
     } else {
       this.showSports = true;
     }
+  }
+
+  addSport(sport) {
+    this.sports.push(sport);
+  }
+
+  deleteSport(i) {
+    this.sports.splice(i, 1 );
   }
 }
 
