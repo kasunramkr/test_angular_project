@@ -1,0 +1,21 @@
+<h1 xmlns="http://www.w3.org/1999/html">Name : {{name}}</h1>
+<h3>E mail : {{email}}</h3>
+<h4>Address : {{address.street}},{{address.city}},{{address.country}}</h4>
+<button (click)=toggleSports()>{{showSports ? "Hide Sports" : "Show Sports"}}</button>
+<div *ngIf="showSports">
+  <h4>Sports</h4>
+  <ul>
+    <li *ngFor=" let sp of sports; let i = index">{{sp}} <button (click)="deleteSport(i)" > Delete</button></li>
+    </ul>
+  <form (submit)="addSport(sport.value)">
+    <label>Add Sport : </label>
+    <input type="text" #sport/><br/>
+    </form>
+  </div>
+<h3>Edit User</h3>
+<form>
+  <label>Name : </label>
+  <input type="text" name="name" [(ngModel)] ="name"/><br/>
+  <label>Email : </label>
+  <input type="text" name="email" [(ngModel)] ="email"/><br/>
+  </form>
