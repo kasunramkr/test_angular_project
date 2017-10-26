@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import {PostsServices} from '../services/posts.services';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-user',
   templateUrl: 'user.component.html',
+  providers: [PostsServices],
 })
 export class UserComponent {
   name: string;
@@ -11,8 +14,9 @@ export class UserComponent {
   sports: string[];
   showSports: boolean;
   newSport: string;
+  posts: Posts[];
 
-  constructor() {
+  constructor(private postsServices: PostsServices) {
     this.name = 'milinda';
     this.email = 'milindakasun@live.com';
     this.address = {
@@ -23,6 +27,9 @@ export class UserComponent {
     this.sports = ['Rugby', 'Baseball', 'Basketball'];
     this.showSports = false;
     this.newSport = '';
+    this.postsServices.getPost().subscribe(posts => {
+      this.posts = posts;
+    });
   }
 
   toggleSports() {
@@ -46,4 +53,11 @@ interface Address {
   street: string;
   city: string;
   country: string;
+}
+
+interface Posts {
+  userId: string;
+  id: string;
+  title: string;
+  body: string;
 }
